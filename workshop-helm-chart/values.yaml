@@ -1,2 +1,3 @@
 replicas: 1
 serviceName: module-14-helm
+image: module14registry.azurecr.io/module-14-image-processing-sam:v1

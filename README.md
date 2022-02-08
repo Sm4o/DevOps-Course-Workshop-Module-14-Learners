@@ -422,6 +422,12 @@ You may want to look at the docs on [environment variables](https://kubernetes.i
 
 > Note that the value of an environment variable must be a string. YAML automatically determines the datatype of the value but you can force a value to be a string by wrapping it in quotes.
 
+```bash
+kubectl create secret generic db-user-pass \  
+--from-literal=DATABASE_USER=<DATABASE_USER> \
+--from-literal=DATABASE_PASSWORD=<DATABASE_PASSWORD> \
+```
+
 Once this is complete you should be able to load up your service's external IP in your browser and see the dashboard of orders!
 
 Let's set the number of pods back down to two before continuing:

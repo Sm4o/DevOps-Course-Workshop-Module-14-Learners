@@ -17,6 +17,28 @@ spec:
     spec:
       containers:
         - name: container-name
-          image: nginx
+          image: {{ .Values.image }}
           ports:
           - containerPort: 80
+          env:
+          - name: DATABASE_NAME
+            value: "open-cohort-1-samuil-petro-order-processing-db"
+          - name: DB_SERVER_NAME
+            value: "open-cohort-1-samuil-petro-order-processing-sqlserver.database.windows.net"
+          - name: ENABLE_ORYX_BUILD
+            value: "true"
+          - name: FINANCE_PACKAGE_URL
+            value: "https://open-cohort-1-samuil-petro-finance-package-app-service.azurewebsites.net"
+          - name: SCHEDULED_JOB_ENABLED
+            value: "true"
+          - name: SCHEDULED_JOB_INTERVAL_SECONDS
+            value: "15"
+          - name: SCHEDULED_JOB_MAX_INSTANCES
+            value: "2"
+          - name: SCM_DO_BUILD_DURING_DEPLOYMENT
+            value: "true"
+          envFrom:
+          - secretRef:
+              name: db-user-pass
+      imagePullSecrets:
+        - name: acr-secret
