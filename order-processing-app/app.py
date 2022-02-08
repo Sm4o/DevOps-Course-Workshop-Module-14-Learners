@@ -80,5 +80,10 @@ def reset_orders():
     return f"Deleted {rows} rows."
 
 
+@app.route("/health")
+def health_check():
+    return {"healthcheck": "ok"}, 200
+
+
 if __name__ == "__main__":
     app.run()

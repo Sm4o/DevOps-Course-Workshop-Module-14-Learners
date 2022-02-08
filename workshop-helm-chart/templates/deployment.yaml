@@ -37,6 +37,8 @@ spec:
             value: "2"
           - name: SCM_DO_BUILD_DURING_DEPLOYMENT
             value: "true"
+          - name: IMAGE_OUTPUT_FOLDER
+            value: "/mnt/azure"
           envFrom:
           - secretRef:
               name: db-user-pass
@@ -47,5 +49,18 @@ spec:
             limits:
               memory: "0.5Gi"
               cpu: "500m"
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 80
+            failureThreshold: 20
+            periodSeconds: 10
+          volumeMounts:
+            - mountPath: "/mnt/azure"
+              name: volume
       imagePullSecrets:
         - name: acr-secret
+      volumes: 
+        - name: volume
+          persistentVolumeClaim:
+            claimName: output-images-azurefile
