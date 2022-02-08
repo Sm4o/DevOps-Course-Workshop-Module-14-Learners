@@ -40,5 +40,12 @@ spec:
           envFrom:
           - secretRef:
               name: db-user-pass
+          resources:
+            requests:
+              memory: "0.5Gi"
+              cpu: "500m"
+            limits:
+              memory: "0.5Gi"
+              cpu: "500m"
       imagePullSecrets:
         - name: acr-secret
